@@ -45,5 +45,12 @@ func (c *RedisConnector) Connect() {
 	} else {
 		logrus.Info("连接redis成功!")
 	}
+}
 
+func (c *RedisConnector) Close() {
+	if err := Redis.Close(); err != nil {
+		logrus.Error(err)
+	} else {
+		logrus.Info("Redis close!")
+	}
 }

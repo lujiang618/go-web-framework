@@ -1,6 +1,10 @@
 package config
 
-import "time"
+import (
+	"time"
+
+	"github.com/davecgh/go-spew/spew"
+)
 
 // 关系型数据库配置信息
 type Database struct {
@@ -35,6 +39,7 @@ type Server struct {
 	HttpPort     uint32
 	ReadTimeout  time.Duration
 	WriteTimeout time.Duration
+	CloseTimeout time.Duration
 }
 
 // 系统配置信息
@@ -72,4 +77,6 @@ func InitConfig(file string) {
 	// 加载配置文件
 	configLoader := NewLoader(file)
 	configLoader.InitConfig()
+
+	spew.Dump(Conf)
 }

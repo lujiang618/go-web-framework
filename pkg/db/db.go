@@ -16,19 +16,34 @@ var (
 
 type Connector interface {
 	Connect()
+	Close()
 }
 
-func InitDb() {
+func InitConnector() {
 	dbConnector = append(dbConnector, NewMysqlConnector())
 	dbConnector = append(dbConnector, NewRedisConnector())
 	dbConnector = append(dbConnector, NewMongoConnector())
+}
 
+func InitDb() {
+	InitConnector()
 	if len(dbConnector) == 0 {
-		logrus.Warning("init db connector is empty!")
+		logrus.Warning("db connector is empty!")
 		return
 	}
 
 	for _, connector := range dbConnector {
 		connector.Connect()
+	}
+}
+
+func Destroy() {
+	if len(dbConnector) == 0 {
+		logrus.Warning("db connector is empty!")
+		return
+	}
+
+	for _, connector := range dbConnector {
+		connector.Close()
 	}
 }

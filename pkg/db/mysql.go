@@ -21,7 +21,7 @@ func NewMysqlConnector() *MysqlConnector {
 }
 
 // 创建MySQL连接客户端
-// 参考资料：https://v1.gorm.io/docs/
+// 参考资料：https://gorm.io/zh_CN/
 func (c *MysqlConnector) Connect() {
 	var err error
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=%s", c.Config.User, c.Config.Password, c.Config.Host, c.Config.Port, c.Config.Name, url.QueryEscape("Asia/Shanghai"))
@@ -35,4 +35,12 @@ func (c *MysqlConnector) Connect() {
 		logrus.Info("连接mysql成功!")
 	}
 
+}
+
+func (c *MysqlConnector) Close() {
+	if err := Mysql.Close(); err != nil {
+		logrus.Error(err)
+	} else {
+		logrus.Info("MySQL close!")
+	}
 }

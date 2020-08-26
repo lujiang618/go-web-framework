@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go-web-frame/pkg/config"
+	"time"
 
 	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -39,5 +40,16 @@ func (c *MongoConnector) Connect() {
 		logrus.Error("connect mongo failed!", err)
 	} else {
 		logrus.Info("连接mongo成功!")
+	}
+}
+
+func (c *MongoConnector) Close() {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	if err := Mongo.Disconnect(ctx); err != nil {
+		logrus.Error(err)
+	} else {
+		logrus.Info("MongoDB close!")
 	}
 }

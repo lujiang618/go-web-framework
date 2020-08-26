@@ -3,26 +3,24 @@ package main
 import (
 	"go-web-frame/pkg/config"
 	"go-web-frame/pkg/db"
+	"go-web-frame/pkg/web"
 )
 
 func init() {
-	// 加载配置文件
-	config.InitConfig("./config/local.yaml")
 
-	// 初始化DB(MySQL、Redis、Mongo)连接
-	db.InitDb()
+	config.InitConfig("./config/local.yaml") // 加载配置文件
+	db.InitDb()                              // 初始化DB(MySQL、Redis、Mongo)连接
 
 }
 
 // 入口文件，main函数
 func main() {
 	// gin.SetMode(setting.ServerSetting.RunMode)
-	//gin.Default()
 
-	// 初始化数据库配置
+	web.StartWebServer()
+	destroy()
+}
 
-	// 加载路由
-
-	//
-
+func destroy() {
+	db.Destroy() // 关闭数据库连接
 }
