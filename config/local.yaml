@@ -47,4 +47,3 @@ system:
   logPath: ""
   logName: ""
   logFileExt: ""
-  timeFormat: ""

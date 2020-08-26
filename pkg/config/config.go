@@ -55,7 +55,6 @@ type System struct {
 	LogSavePath string
 	LogSaveName string
 	LogFileExt  string
-	TimeFormat  string
 }
 
 // 配置
