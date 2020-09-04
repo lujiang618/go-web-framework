@@ -31,6 +31,7 @@ func Register(c *gin.Context) (*RegisterParams, error) {
 	return params, nil
 }
 
+// 验证获取用户详情
 func View(c *gin.Context) (*ViewParams, error) {
 	params := &ViewParams{}
 

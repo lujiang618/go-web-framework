@@ -4,6 +4,7 @@ import (
 	"go-web-frame/controller"
 	"go-web-frame/pkg/api/middleware"
 
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,6 +15,13 @@ func InitRouter() {
 
 func CreateRouter() *gin.Engine {
 	router := gin.New()
+
+	if gin.Mode() != gin.ReleaseMode {
+		prefix := "/pprof"
+
+		pprof.Register(router, prefix)
+	}
+
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(middleware.Consuming())
