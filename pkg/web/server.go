@@ -25,14 +25,12 @@ func NewServer() *Server {
 }
 
 func (w *Server) Start() {
-	router := routers.CreateRouter()
-
 	addr := fmt.Sprintf(":%d", w.Config.HttpPort)
 	logrus.Info("启动web服务，监听端口：", w.Config.HttpPort)
 
 	w.Server = &http.Server{
 		Addr:              addr,
-		Handler:           router,
+		Handler:           routers.Router,
 		ReadHeaderTimeout: w.Config.ReadTimeout,
 		WriteTimeout:      w.Config.WriteTimeout,
 	}
