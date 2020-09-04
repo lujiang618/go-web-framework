@@ -23,10 +23,10 @@ func CreateRouter() *gin.Engine {
 	{
 		// 会员接口
 		v1Member := apiV1.Group("member")
-		v1Member.GET("/info", controller.NewMember().View)               // 会员详情
+		v1Member.GET("/info/:id", controller.NewMember().View)           // 会员详情
 		v1Member.POST("/login", controller.NewMember().Login)            // 登录
 		v1Member.POST("/register", controller.NewMember().Register)      // 注册
-		v1Member.GET("/group", controller.NewMember().GroupView)         // 获取会员的团队信息
+		v1Member.GET("/group/:id", controller.NewMember().GroupView)     // 获取会员的团队信息
 		v1Member.PUT("/password", controller.NewMember().UpdatePassword) // 会员详情
 
 	}

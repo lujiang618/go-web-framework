@@ -30,3 +30,15 @@ func Register(c *gin.Context) (*RegisterParams, error) {
 
 	return params, nil
 }
+
+func View(c *gin.Context) (*ViewParams, error) {
+	params := &ViewParams{}
+
+	if err := c.ShouldBindUri(params); err != nil {
+		logrus.Error(err)
+
+		return nil, err
+	}
+
+	return params, nil
+}

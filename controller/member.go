@@ -18,8 +18,18 @@ func NewMember() *Member {
 	return &Member{}
 }
 
+// 用户资料API
 func (m *Member) View(c *gin.Context) {
-	api.SetResponse(c, http.StatusOK, 1, "")
+	params, err := filter.View(c)
+	if err != nil {
+		api.SetResponse(c, http.StatusOK, code.ERROR_REQUEST_ERROR, "")
+		return
+	}
+
+	// 调用service对应的方法
+	logrus.Info(params)
+
+	api.SetResponse(c, http.StatusOK, code.Success, "")
 }
 
 // 用户登录API

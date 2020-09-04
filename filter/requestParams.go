@@ -10,3 +10,7 @@ type RegisterParams struct {
 	Email    string `form:"email" binding:"required,email"`
 	Password string `form:"password" binding:"required"`
 }
+
+type ViewParams struct {
+	Id uint `uri:"id" binding:"required,numeric"`
+}
