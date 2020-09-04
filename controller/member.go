@@ -6,6 +6,8 @@ import (
 	"go-web-frame/pkg/api/code"
 	"net/http"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,20 +24,28 @@ func (m *Member) View(c *gin.Context) {
 
 // 用户登录API
 func (m *Member) Login(c *gin.Context) {
-	if err := filter.Login(c); err != nil {
+	params, err := filter.Login(c)
+	if err != nil {
 		api.SetResponse(c, http.StatusOK, code.ERROR_REQUEST_ERROR, "")
 		return
 	}
+
+	// 调用service对应的方法
+	logrus.Info(params)
 
 	api.SetResponse(c, http.StatusOK, code.Success, "")
 }
 
 // 用户注册API
 func (m *Member) Register(c *gin.Context) {
-	if err := filter.Register(c); err != nil {
+	params, err := filter.Register(c)
+	if err != nil {
 		api.SetResponse(c, http.StatusOK, code.ERROR_REQUEST_ERROR, "")
 		return
 	}
+
+	// 调用service对应的方法
+	logrus.Info(params)
 
 	api.SetResponse(c, http.StatusOK, code.Success, "")
 }

@@ -6,31 +6,27 @@ import (
 )
 
 // 验证登录的请求参数
-func Login(c *gin.Context) error {
+func Login(c *gin.Context) (*LoginParams, error) {
 	params := &LoginParams{}
 
 	if err := c.ShouldBind(params); err != nil {
 		logrus.Error(err)
 
-		return err
+		return nil, err
 	}
 
-	// 调用service对应的方法
-
-	return nil
+	return params, nil
 }
 
 // 验证注册信息
-func Register(c *gin.Context) error {
+func Register(c *gin.Context) (*RegisterParams, error) {
 	params := &RegisterParams{}
 
 	if err := c.ShouldBind(params); err != nil {
 		logrus.Error(err)
 
-		return err
+		return nil, err
 	}
 
-	// 调用service对应的方法
-
-	return nil
+	return params, nil
 }
