@@ -3,5 +3,5 @@
 
 
 cd go-web-framework
-mkdir config controller docs filter pkg router service
+mkdir config controller docs filter pkg router service runtime/logs
 

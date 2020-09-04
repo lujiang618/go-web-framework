@@ -9,7 +9,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	"github.com/sirupsen/logrus"
 )
@@ -66,7 +65,7 @@ func (w *Server) Destroy() {
 
 	select {
 	case <-ctx.Done():
-		logrus.Infof("timeout of %d seconds.", w.Config.CloseTimeout*time.Second) // TODO 这里好像有问题
+		logrus.Infof("timeout of %d seconds.", w.Config.CloseTimeout) // TODO 这里好像有问题
 	}
 
 	logrus.Info("Web server close.")

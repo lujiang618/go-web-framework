@@ -1,6 +1,7 @@
 package api
 
 import (
+	"go-web-frame/pkg/api/code"
 	"go-web-frame/pkg/api/response"
 
 	"github.com/gin-gonic/gin"
@@ -9,6 +10,10 @@ import (
 func SetResponse(c *gin.Context, httpCode, responseCode int, data interface{}) {
 	base := response.NewResponse(c)
 	base.SetResponse(httpCode, responseCode, data)
+
+	if responseCode != code.Success {
+		c.Abort()
+	}
 
 	WriterAccessLog()
 }
