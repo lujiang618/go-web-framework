@@ -54,6 +54,7 @@ func (w *Server) Start() {
 }
 
 // 关闭http服务
+// 参考资料： https://www.dazhuanlan.com/2019/11/28/5ddf97117da5a/
 func (w *Server) Destroy() {
 	ctx, cancel := context.WithTimeout(context.Background(), w.Config.CloseTimeout)
 	defer cancel()

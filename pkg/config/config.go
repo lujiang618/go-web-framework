@@ -2,8 +2,6 @@ package config
 
 import (
 	"time"
-
-	"github.com/davecgh/go-spew/spew"
 )
 
 // 关系型数据库配置信息
@@ -77,6 +75,4 @@ func InitConfig(file string) {
 	// 加载配置文件
 	configLoader := NewLoader(file)
 	configLoader.InitConfig()
-
-	spew.Dump(Conf)
 }
