@@ -27,7 +27,7 @@ server:
   httpPort: 8866
   readTimeout: 2000000000
   writeTimeout: 5000000000
-  closeTimeout: 8000000000
+  closeTimeout: 3000000000
 
 # 系统相关配置
 system:
@@ -45,6 +45,6 @@ system:
   exportPath: ""
   qrcodePath: ""
 
-  logPath: ""
+  logPath: "runtime/logs/gin.log"
   logName: ""
   logFileExt: ""

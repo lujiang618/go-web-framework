@@ -6,7 +6,8 @@
 # 结构
 ├── config   
 ├── controller   
-├── docs  
+├── docs    
+├───── swagger  
 ├── filter  
 ├── model  
 ├── service    
@@ -23,6 +24,9 @@
 + Go-redis
 + Yaml config file
 + Gin
++ pprof
++ swagger
+
 
 
 # 其他

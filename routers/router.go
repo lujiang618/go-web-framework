@@ -2,6 +2,11 @@ package routers
 
 import (
 	"go-web-frame/pkg/api/middleware"
+	"go-web-frame/pkg/config"
+	"io"
+	"os"
+
+	"github.com/sirupsen/logrus"
 
 	_ "go-web-frame/docs/swagger"
 
@@ -15,8 +20,22 @@ import (
 var Router *gin.Engine
 
 func init() {
+	logrus.Println("routers init exec")
+	SetLogs()
+
 	InitRouter()
 	CreateApiRouter()
+}
+
+func SetLogs() {
+	// 创建日志文件并设置为 gin.DefaultWriter
+	logrus.Info("log path", config.Conf.System.LogPath)
+	f, _ := os.Create(config.Conf.System.LogPath)
+	gin.DefaultWriter = io.MultiWriter(f)
+
+	if gin.Mode() != gin.ReleaseMode {
+		gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+	}
 }
 
 func InitRouter() {

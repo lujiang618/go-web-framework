@@ -25,7 +25,7 @@ func InitConnector() {
 	dbConnector = append(dbConnector, NewMongoConnector())
 }
 
-func InitDb() {
+func init() {
 	InitConnector()
 	if len(dbConnector) == 0 {
 		logrus.Warning("db connector is empty!")

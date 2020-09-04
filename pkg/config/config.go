@@ -1,7 +1,10 @@
 package config
 
 import (
+	"go-web-frame/pkg/utils"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 // 关系型数据库配置信息
@@ -55,9 +58,9 @@ type System struct {
 	QrCodeSavePath string
 	FontSavePath   string
 
-	LogSavePath string
-	LogSaveName string
-	LogFileExt  string
+	LogPath    string
+	LogName    string
+	LogFileExt string
 }
 
 // 配置
@@ -71,8 +74,16 @@ type Config struct {
 
 var Conf = &Config{}
 
-func InitConfig(file string) {
+func init() {
 	// 加载配置文件
-	configLoader := NewLoader(file)
+	configLoader := NewLoader(getConfigFileName())
 	configLoader.InitConfig()
+}
+
+func getConfigFileName() string {
+	if utils.PathExists("config/local.yaml") {
+		return "config/local.yaml"
+	}
+
+	return utils.StringSplice("config/", gin.Mode(), ".yaml")
 }
