@@ -4,6 +4,11 @@ import (
 	"go-web-frame/controller"
 	"go-web-frame/pkg/api/middleware"
 
+	_ "go-web-frame/docs/swagger"
+
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
+
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 )
@@ -25,6 +30,8 @@ func CreateRouter() *gin.Engine {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(middleware.Consuming())
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// v1 版本的路由配置
 	apiV1 := router.Group("/v1")

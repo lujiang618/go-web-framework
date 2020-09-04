@@ -23,3 +23,11 @@
 + Go-redis
 + Yaml config file
 + Gin
+
+
+# 其他
+```bash
+# 生成swag文档
+go get -u github.com/swaggo/swag/cmd/swag
+swag init -o ./docs/swagger
+```
